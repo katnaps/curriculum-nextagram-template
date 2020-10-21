@@ -26,13 +26,13 @@ def create():
         if result:
             # session["user_id"] = user.id
             login_user(user)
-            flash("Login successfully.")
-            return redirect(url_for('users.show',username=user.username))
+            flash("Login successfully", "success")
+            return redirect(url_for('home'))
         else:
-            flash("Wrong password.")
+            flash("Wrong password", "danger")
             return redirect(url_for('sessions.new'))
     else:
-        flash("No user found.")
+        flash("No user found", "danger")
         return redirect(url_for('sessions.new'))
 
 
@@ -40,5 +40,5 @@ def create():
 @login_required
 def destroy():
     logout_user()
-    flash('Signout!')
+    flash('Signout!', 'success')
     return redirect(url_for('sessions.new'))
