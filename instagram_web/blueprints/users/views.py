@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models.user import User
 
 
@@ -19,15 +19,17 @@ def create():
 
     if user.save():
         # Successful save
+        flash("User created")
         return redirect("/")
     else:
         # Failed to save
+        flash('Unable to create!')
         return redirect(url_for("users.new"))
 
 
 @users_blueprint.route('/<username>', methods=["GET"])
 def show(username):
-    pass
+    return username
 
 
 @users_blueprint.route('/', methods=["GET"])

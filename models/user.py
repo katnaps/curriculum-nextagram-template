@@ -2,13 +2,14 @@ from models.base_model import BaseModel
 import peewee as pw
 from werkzeug.security import generate_password_hash
 import re
+from flask_login import UserMixin
 
 
-class User(BaseModel):
+class User(BaseModel, UserMixin):
     username = pw.CharField(unique=True)
     email = pw.CharField(unique=True)
     password_hash = pw.CharField(unique=False)
-    password=None
+    password = None
 
     def validate(self):
         existing_email = User.get_or_none(User.email == self.email)
@@ -30,7 +31,7 @@ class User(BaseModel):
             if not re.search("[A-Z]", self.password):
                 self.errors.append("Password must include uppercase")
 
-            if not re.search("[\[\]\*\^\%]", self.password):
+            if not re.search("[\[\]\*\^\%\!]", self.password):
                 self.errors.append("Password must include special characters")
 
             if len(self.errors) == 0:

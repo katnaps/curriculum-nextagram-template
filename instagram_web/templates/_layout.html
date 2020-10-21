@@ -24,8 +24,22 @@
 
   </head>
   <body>
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+      <!-- flash message -->
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+
+      {% block content %}
+      {% endblock %}
+    </div>
     <footer>
       Made with &hearts; at <a target="_blank" href="https://www.nextacademy.com/?utm_source=github&utm_medium=student-challenge&utm_campaign=flask-nextagram">NEXT Academy</a>
     </footer>
