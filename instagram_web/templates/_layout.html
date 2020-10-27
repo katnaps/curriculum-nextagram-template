@@ -24,6 +24,24 @@
 
   </head>
   <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="{{url_for('home')}}">
+        <img src="https://instagram-clone-image.s3-ap-southeast-1.amazonaws.com/nodes.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+        Link-Up
+      </a>
+      {% if current_user.is_authenticated %}
+      <form action="{{url_for('sessions.destroy')}}" method="post">
+          <a class="btn btn-primary mx-3" href="{{url_for('users.show', username = current_user.username)}}">Profile Page</a>
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+          <input type="submit" class="btn btn-danger" value="Signout">
+        </form>
+      {% else %}
+      <form class="form-inline my-2 my-lg-0">
+        <a class="btn btn-primary" href="{{url_for('sessions.new')}}">Login-In</a>
+        <a class="btn btn-success mx-3" href="{{url_for('users.new')}}">Sign Up</a>
+      </form>
+      {% endif %}
+    </nav>
     <div class="container">
       <!-- flash message -->
       {% with messages = get_flashed_messages(with_categories=true) %}
