@@ -19,7 +19,7 @@ class Config(object):
     MAILGUN_API               = os.environ.get("MAILGUN_API")
 
     G_CLIENT_ID               = os.environ.get("G_CLIENT_ID")
-    G_CLIENT_SECRET               = os.environ.get("G_CLIENT_SECRET")
+    G_CLIENT_SECRET           = os.environ.get("G_CLIENT_SECRET")
 
 
 class ProductionConfig(Config):
