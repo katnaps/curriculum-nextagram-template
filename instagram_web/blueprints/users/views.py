@@ -15,6 +15,7 @@ users_blueprint = Blueprint('users',
 def new():
     return render_template('users/new.html')
 
+# Create user infomation
 @users_blueprint.route('/', methods=['POST'])
 def create():
     data = request.form
